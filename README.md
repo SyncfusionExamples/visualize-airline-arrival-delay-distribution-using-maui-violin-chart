@@ -7,6 +7,7 @@ This .NET MAUI application demonstrates how to create a Violin Chart using the S
 A violin chart is a sophisticated data visualization technique that combines box-and-whisker plot functionality with kernel density estimation to display the complete distribution of data across a continuous range. Unlike traditional bar charts or simple box plots, violin charts reveal the density and shape of distributions at different values, providing a comprehensive view of how data points are distributed across the entire range. 
 
 This blog will get the output that resembles the following image.
+<img width="1901" height="942" alt="Screenshot 2025-12-18 230109" src="https://github.com/user-attachments/assets/f0c3f6fe-0a3f-4aaa-860c-cedb5d16c659" />
 
 
 ## Troubleshooting
