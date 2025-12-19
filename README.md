@@ -20,7 +20,7 @@ Box and Whisker charts are used to:
 - Support statistical analysis and comparative data exploration across multiple categories.
 
 This blog will get the output that resembles the following image.
-<img width="1901" height="942" alt="Screenshot 2025-12-18 230109" src="https://github.com/user-attachments/assets/f0c3f6fe-0a3f-4aaa-860c-cedb5d16c659" />
+<img width="1376" height="645" alt="image" src="https://github.com/user-attachments/assets/08065b07-166c-47a8-b520-ac4f71a0e37b" />
 
 ## Troubleshooting
 
