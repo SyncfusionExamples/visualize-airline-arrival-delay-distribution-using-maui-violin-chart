@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Syncfusion.Maui.Core.Hosting;
+using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace ViolinChart
 {
@@ -10,7 +10,7 @@ namespace ViolinChart
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureSyncfusionCore()
+                .ConfigureSyncfusionToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
