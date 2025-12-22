@@ -104,7 +104,7 @@
                                                          Opacity="0.92" />
                     </chart:SfCartesianChart>
                     <!-- Legend row (row 1) -->
-                    <Grid Grid.Row="1" Padding="{OnPlatform Default='4,8,4,2', Android='2,6,2,2', iOS='2,6,2,2'}">
+                    <Grid Grid.Row="1" HeightRequest="{OnPlatform WinUI=50, Android=30, iOS=50, MacCatalyst=50}" Padding="{OnPlatform Default='4,8,4,2', Android='2,6,2,2', iOS='2,6,2,2'}">
                         <CollectionView ItemsSource="{Binding AirlineData}"  
                                         HorizontalScrollBarVisibility="Never" HorizontalOptions="Center"
                                         VerticalScrollBarVisibility="Never">
