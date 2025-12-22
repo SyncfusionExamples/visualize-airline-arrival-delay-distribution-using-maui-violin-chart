@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
+	xmlns:local="clr-namespace:ViolinChart"
+             x:Class="ViolinChart.MainPage">
+    
+    <!-- ViewModel -->
+    <ContentPage.BindingContext>
+        <local:ViolinViewModel />
+    </ContentPage.BindingContext>
+    <!-- Full-screen layout -->
+    <Grid>
+        <!-- Full-screen “Card” container -->
+        <Border Margin="{OnPlatform Default=26, Android=12, iOS=12}"
+                Padding="{OnPlatform Default=8, Android=7, iOS=7}" 
+                Stroke="{AppThemeBinding Light=#2A2F3A, Dark=#1F2430}"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 16">
+            <Grid>
+                <Grid Grid.Row="1" RowSpacing="6"
+                      Margin="{OnPlatform Default='8,0,8,8', Android='6,0,6,6', iOS='6,0,6,6'}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <!-- Chart fills row 0 -->
+                    <chart:SfCartesianChart Grid.Row="0"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            BackgroundColor="Transparent">
+                        <!-- Title spacer like examples -->
+                        <chart:SfCartesianChart.Title>
+                            <Border Grid.Row="0"
+                                    Margin="{OnPlatform Default='12,10,12,6', Android='8,8,8,4', iOS='8,8,8,4'}"
+                                    StrokeThickness="0"
+                                    BackgroundColor="Transparent">
+                                <Grid ColumnDefinitions="56,* ,Auto" RowDefinitions="Auto,Auto">
+                                    <!-- Accent icon block -->
+                                    <Border Grid.RowSpan="2" Grid.Column="0"
+                                            BackgroundColor="#3B82F6"
+                                            WidthRequest="46" HeightRequest="46"
+                                            StrokeShape="RoundRectangle 10"
+                                            HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Grid>
+                                            <Path Data="M6,20 L18,20 18,22 6,22 z M10,8 L22,20 18,20 10,12 6,16 4,14 z"
+                                                  Fill="White" Opacity="0.95" Margin="10,8"/>
+                                        </Grid>
+                                    </Border>
+                                    <!-- Title + subtitle -->
+                                    <StackLayout Grid.Column="1" Grid.Row="0" Spacing="3" 
+                                                 VerticalOptions="Center" Margin="10,0,8,0">
+                                        <Label Text="Airline Arrival Delay Distribution"
+                                               FontAttributes="Bold"
+                                               FontSize="{OnPlatform Default=20, Android=16, iOS=18}"
+                                               TextColor="Black" />
+                                        <Label Text="Violin plot of per-flight arrival delays (minutes), grouped by airline"
+                                               FontSize="{OnPlatform Default=13, Android=11, iOS=12}"
+                                               TextColor="Gray" />
+                                    </StackLayout>
+                                </Grid>
+                            </Border>
+                        </chart:SfCartesianChart.Title>
+                        <!-- X Axis -->
+                        <chart:SfCartesianChart.XAxes>
+                            <chart:CategoryAxis ShowMajorGridLines="False"
+                                                EdgeLabelsDrawingMode="Shift"
+                                                AxisLineStyle="{chart:ChartLineStyle Stroke=#233042, StrokeWidth=1}">
+                                <chart:CategoryAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle FontSize="{OnPlatform Default=11, Android=10}"/>
+                                </chart:CategoryAxis.LabelStyle>
+                            </chart:CategoryAxis>
+                        </chart:SfCartesianChart.XAxes>
+                        <!-- Y Axis -->
+                        <chart:SfCartesianChart.YAxes>
+                            <chart:NumericalAxis Interval="40" Minimum="-10" 
+                                                 ShowMajorGridLines="False">
+                                <chart:NumericalAxis.Title>
+                                    <chart:ChartAxisTitle Text="Arrival delay (minutes)"  />
+                                </chart:NumericalAxis.Title>
+                                <chart:NumericalAxis.AxisLineStyle>
+                                    <chart:ChartLineStyle Stroke="#233042" 
+                                                          StrokeWidth="1"/>
+                                </chart:NumericalAxis.AxisLineStyle>
+                                <chart:NumericalAxis.MajorGridLineStyle>
+                                    <chart:ChartLineStyle Stroke="#1F2937" StrokeWidth="1" 
+                                                          StrokeDashArray="4,4"/>
+                                </chart:NumericalAxis.MajorGridLineStyle>
+                                <chart:NumericalAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle TextColor="#9CA3AF" 
+                                                               FontSize="{OnPlatform Default=11, Android=10}" />
+                                </chart:NumericalAxis.LabelStyle>
+                            </chart:NumericalAxis>
+                        </chart:SfCartesianChart.YAxes>
+                        <!-- Your custom violin series -->
+                        <local:BoxAndWhiskerSeriesViolin ItemsSource="{Binding AirlineData}"
+                                                         XBindingPath="Airline"
+                                                         YBindingPath="ArrivalDelayMinutes"
+                                                         PaletteBrushes="{Binding PaletteBrushesDark}"
+                                                         ShowOutlier="True"
+                                                         ShowMedian="True"
+                                                         StrokeWidth="1.6"
+                                                         Opacity="0.92" />
+                    </chart:SfCartesianChart>
+                    <!-- Legend row (row 1) -->
+                    <Grid Grid.Row="1" HeightRequest="{OnPlatform WinUI=50, Android=30, iOS=50, MacCatalyst=50}" Padding="{OnPlatform Default='4,8,4,2', Android='2,6,2,2', iOS='2,6,2,2'}">
+                        <CollectionView ItemsSource="{Binding AirlineData}"  
+                                        HorizontalScrollBarVisibility="Never" HorizontalOptions="Center"
+                                        VerticalScrollBarVisibility="Never">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" 
+                                                   ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="Auto, *" Padding="0" Margin="0,0,6,8">
+                                        <!-- Rounded color swatch using same brush as chart -->
+                                        <RoundRectangle Grid.Column="0"  WidthRequest="{OnPlatform Android=10,Default=20, iOS=10}" 
+                                                        HeightRequest="{OnPlatform Android=10,Default=20, iOS=10}" 
+                                                        BackgroundColor="{Binding legendColor}" Margin="8, 0,5,0"/>
+                                        <!-- Label -->
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Airline}"
+                                               Margin="6,0,0,0"
+                                               VerticalOptions="Center" 
+                                               FontSize="{OnPlatform Default=12, Android=11, iOS=12}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
