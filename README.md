@@ -28,4 +28,4 @@ This blog will get the output that resembles the following image.
 
 If you are facing a path too long exception when building this example project, close Visual Studio and rename the repository to short and build the project.
 
-For a step-by-step procedure, refer to the [Visualize airline arrival delay distribution using MAUI chart]().
+For a step-by-step procedure, refer to the [Visualize airline arrival delay distribution using MAUI chart](https://www.syncfusion.com/blogs/post/dotnet-maui-violin-chart-airline-delay).
